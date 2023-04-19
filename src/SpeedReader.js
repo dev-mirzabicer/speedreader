@@ -3,6 +3,7 @@ import { useInterval } from "react-use";
 import "./SpeedReader.css";
 
 const SpeedReader = ({ text, wordsPerMinute, theme }) => {
+  const [currentTheme, setCurrentTheme] = useState(theme);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentWord, setCurrentWord] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
@@ -64,7 +65,7 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
 
   return (
     <>
-      <div className={`speed-reader ${theme}`}>
+      <div className={`speed-reader ${currentTheme}`}>
         <div className="text-container">
           {/* <div className="left-words">{leftWords}</div> */}
           <div className="current-word" onClick={handlePlayPause}>
@@ -75,6 +76,25 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
       </div>
       <div className="controls">
         <button onClick={goBack}>Go Back</button>
+        <button
+          onClick={() => {
+            if (currentTheme === "dark") setCurrentTheme("light");
+            else setCurrentTheme("dark");
+          }}
+        >
+          Switch Theme
+        </button>
+        <form>
+          <label>
+            Skip:
+            <input
+              type="number"
+              name="skip"
+              value={currentIndex}
+              onChange={(e) => setCurrentIndex(parseInt(e.target.value))}
+            ></input>
+          </label>
+        </form>
       </div>
     </>
   );
