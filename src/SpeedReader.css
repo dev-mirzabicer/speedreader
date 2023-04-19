@@ -1,0 +1,51 @@
+.speed-reader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* white-space: nowrap; */
+  width: 100%;
+}
+
+.left-words,
+.right-words {
+  opacity: 0.1;
+  font-size: 1.75rem;
+}
+
+.left-words,
+.right-words,
+.current-word {
+  padding: 20px;
+  text-align: center;
+}
+
+.left-words {
+  margin-left: auto;
+}
+
+.right-words {
+  margin-right: auto;
+}
+
+.current-word {
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.speed-reader.dark {
+  background-color: #333;
+  color: #eee;
+}
+
+.speed-reader.light {
+  background-color: #eee;
+  color: #333;
+}
