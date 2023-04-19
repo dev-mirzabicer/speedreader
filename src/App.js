@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import SpeedReader from "./SpeedReader";
+import raw from "./text.txt";
 
 function App() {
-  const text =
-    "Much of what we know about the types of repeated DNA sequences in the chromosomes of various eukaryotic species resulted from DNA renaturation experiments. The two strands of a DNA double helix are held together by a large number of relatively weak hydrogen bonds between complementary bases. When DNA molecules in aqueous solution are heated to near 100C, these bonds are broken and the complementary strands of DNA separate. This process is called denaturation. If the complementary single strands of DNA are cooled slowly under the right conditions, the complementary base sequences will find each other and will re-form base-paired double helices. This reformation of double helices from the complementary single strands of DNA is called renaturation. If a DNA sequence is repeated many times, denaturation will yield a large num- ber of complementary single strands that will renature rapidly, faster than the rate of renaturation of sequences that are present only once in the genome. Indeed, the rate of DNA renaturation is directly proportional to copy number (the number of copies of the sequence in the genome)—the higher the copy number, the faster the rate and the less time required for renaturation. Mathematical analyses of the rates of renaturation of DNA sequences in eukaryotic genomes provided strong evidence for the presence of different classes of repeated DNA sequences, or repetitive DNA, in eukaryotic chromosomes. The recent genome sequencing projects have provided additional information about the different types of repetitive DNA sequences in eukaryotic genomes, and ongoing sequencing projects are providing information about the sequence variability that occurs in human populations (see On the Cutting Edge: The 1000 Genomes Project). The locations of different DNA sequences in chromosomes can be determined directly by procedures similar to the renaturation experiments described here. With this procedure, called in situ hybridization, labeled strands of DNA form double helices with denatured DNA still present in chromo- somes (see Appendix C: In Situ Hybridization). The most highly repeated sequences in eukaryotic genomes do not encode proteins. Indeed, they are not even transcribed. Other less repetitive sequences encode proteins, such as ribosomal proteins and the muscle proteins actin and myosin that are needed in large amounts and are each encoded by several genes. The genes that specify ribosomal RNAs are also multicopy genes because cells need large amounts of ribosomal RNA to produce the ribosomes required for protein synthesis. The most prevalent of the repeated DNA sequences are transposable genetic elements, DNA sequences that can move from one location in a chromosome to another or even to a different chromosome (Chapter 17), or inactive sequences derived from transposable elements. In D. melanogaster, about 90 different families of transposable elements have been characterized and been given interesting names such as hobo, pogo, and gypsy that suggest their mobility. A much larger proportion— between 40 and 50 percent—of the human genome contains transposable elements or sequences derived from them. As much as 80 percent of the corn genome may consist of transposable genetic elements or their derivatives. These repetitive transposable elements are discussed in more detail in Chapters 15 and 17.";
-  const wordsPerMinute = 280;
+  const [text, setText] = useState();
+  fetch(raw)
+    .then((r) => r.text())
+    .then((text) => setText(text));
+  // const text =
+  //   "Much of what we know about the types of repeated DNA sequences in the";
+  const wordsPerMinute = 250;
   const theme = "light";
 
-  return (
-    <div className="App">
-      <SpeedReader text={text} wordsPerMinute={wordsPerMinute} theme={theme} />
-    </div>
-  );
+  if (text)
+    return (
+      <div className="App">
+        <SpeedReader
+          text={text}
+          wordsPerMinute={wordsPerMinute}
+          theme={theme}
+        />
+      </div>
+    );
+  else return <p>Loading...</p>;
 }
 
 export default App;

@@ -9,6 +9,10 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
   const [currentDelay, setCurrentDelay] = useState(0);
   const words = text.split(" ");
 
+  if (!(currentIndex < words.length - 1 && currentIndex >= 0)) {
+    setCurrentIndex(0);
+  }
+
   const wordDelay = (60 / wordsPerMinute) * 1000;
 
   const getDelayForWord = useCallback(
@@ -19,12 +23,18 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
         return wordDelay * 1.75;
       } else if (word.length > 11) {
         return wordDelay * 1.2;
+      } else if (word.includes("\n")) {
+        return 3 * wordDelay;
       } else {
         return wordDelay;
       }
     },
     [wordDelay]
   );
+
+  const goBack = useCallback(() => {
+    setCurrentIndex(currentIndex - 1);
+  }, [currentIndex]);
 
   useInterval(
     () => {
@@ -46,22 +56,27 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
   // const leftWords = words
   //   .slice(currentIndex - 3, currentIndex)
   //   .join(" ")
-  //   .slice(0, 10);
+  //   .slice(-2, 0);
   // const rightWords = words
   //   .slice(currentIndex + 1, currentIndex + 4)
   //   .join(" ")
-  //   .slice(0, 10);
+  //   .slice(0, 3);
 
   return (
-    <div className={`speed-reader ${theme}`}>
-      <div className="text-container">
-        {/* <div className="left-words">{leftWords}</div> */}
-        <div className="current-word" onClick={handlePlayPause}>
-          {currentWord}
+    <>
+      <div className={`speed-reader ${theme}`}>
+        <div className="text-container">
+          {/* <div className="left-words">{leftWords}</div> */}
+          <div className="current-word" onClick={handlePlayPause}>
+            {currentWord}
+          </div>
+          {/* <div className="right-words">{rightWords}</div> */}
         </div>
-        {/* <div className="right-words">{rightWords}</div> */}
       </div>
-    </div>
+      <div className="controls">
+        <button onClick={goBack}>Go Back</button>
+      </div>
+    </>
   );
 };
 
