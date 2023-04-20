@@ -9,7 +9,8 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentDelay, setCurrentDelay] = useState(0);
   const [currentWPM, setCurrentWPM] = useState(wordsPerMinute);
-  const words = text.split(" ");
+  const [currentText, setCurrentText] = useState(text);
+  const words = currentText.split(" ");
 
   if (!(currentIndex < words.length - 1 && currentIndex >= 0)) {
     setCurrentIndex(0);
@@ -19,11 +20,11 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
 
   const getDelayForWord = useCallback(
     (word) => {
-      if (word.endsWith(",")) {
+      if (word.includes(",")) {
         return wordDelay * 1.25;
-      } else if (word.endsWith(".")) {
+      } else if (word.includes(".")) {
         return wordDelay * 1.75;
-      } else if (word.length > 11) {
+      } else if (word.length > 10) {
         return wordDelay * 1.2;
       } else if (word.includes("\n")) {
         return 3 * wordDelay;
@@ -86,25 +87,40 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
           Switch Theme
         </button>
         <form>
-          <label>
-            Skip:
-            <input
-              type="number"
-              name="skip"
-              value={currentIndex}
-              onChange={(e) => setCurrentIndex(parseInt(e.target.value))}
-            ></input>
-            {words.length}
-          </label>
-          <label>
-            WPM:
-            <input
-              type="number"
-              name="wpm"
-              value={currentWPM}
-              onChange={(e) => setCurrentWPM(parseInt(e.target.value))}
-            ></input>
-          </label>
+          <div className="skip">
+            <label>
+              Skip:
+              <input
+                type="number"
+                name="skip"
+                value={currentIndex}
+                onChange={(e) => setCurrentIndex(parseInt(e.target.value))}
+              ></input>
+              {words.length}
+            </label>
+          </div>
+          <div className="wpm">
+            <label>
+              WPM:
+              <input
+                type="number"
+                name="wpm"
+                value={currentWPM}
+                onChange={(e) => setCurrentWPM(parseInt(e.target.value))}
+              ></input>
+            </label>
+          </div>
+          <div className="text-area">
+            <label>
+              Text:
+              <textarea
+                name="text"
+                rows="10"
+                value={currentText}
+                onChange={(e) => setCurrentText(e.target.value)}
+              ></textarea>
+            </label>
+          </div>
         </form>
       </div>
     </>

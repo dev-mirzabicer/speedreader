@@ -49,3 +49,8 @@
   background-color: #eee;
   color: #333;
 }
+
+.text-area textarea {
+  margin: 1% 1% 0 1%;
+  width: 90%;
+}
