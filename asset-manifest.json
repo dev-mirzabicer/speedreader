@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/speedreader/static/css/main.9ef854fc.css",
-    "main.js": "/speedreader/static/js/main.54684300.js",
-    "static/media/text.txt": "/speedreader/static/media/text.2893923c2132e212a970.txt",
+    "main.js": "/speedreader/static/js/main.d9771e3e.js",
+    "static/media/text.txt": "/speedreader/static/media/text.8a805b67f98d0a151581.txt",
     "index.html": "/speedreader/index.html",
     "main.9ef854fc.css.map": "/speedreader/static/css/main.9ef854fc.css.map",
-    "main.54684300.js.map": "/speedreader/static/js/main.54684300.js.map"
+    "main.d9771e3e.js.map": "/speedreader/static/js/main.d9771e3e.js.map"
   },
   "entrypoints": [
     "static/css/main.9ef854fc.css",
-    "static/js/main.54684300.js"
+    "static/js/main.d9771e3e.js"
   ]
 }
