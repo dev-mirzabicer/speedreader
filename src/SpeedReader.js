@@ -8,6 +8,7 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
   const [currentWord, setCurrentWord] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentDelay, setCurrentDelay] = useState(0);
+  const [currentWPM, setCurrentWPM] = useState(wordsPerMinute);
   const words = text.split(" ");
 
   if (!(currentIndex < words.length - 1 && currentIndex >= 0)) {
@@ -94,6 +95,15 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
               onChange={(e) => setCurrentIndex(parseInt(e.target.value))}
             ></input>
             {words.length}
+          </label>
+          <label>
+            WPM:
+            <input
+              type="number"
+              name="wpm"
+              value={currentWPM}
+              onChange={(e) => setCurrentWPM(parseInt(e.target.value))}
+            ></input>
           </label>
         </form>
       </div>
