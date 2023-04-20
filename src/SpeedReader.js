@@ -93,6 +93,7 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
               value={currentIndex}
               onChange={(e) => setCurrentIndex(parseInt(e.target.value))}
             ></input>
+            {words.length}
           </label>
         </form>
       </div>
