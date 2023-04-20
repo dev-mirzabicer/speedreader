@@ -15,7 +15,7 @@ const SpeedReader = ({ text, wordsPerMinute, theme }) => {
     setCurrentIndex(0);
   }
 
-  const wordDelay = (60 / wordsPerMinute) * 1000;
+  const wordDelay = (60 / currentWPM) * 1000;
 
   const getDelayForWord = useCallback(
     (word) => {
